@@ -10,7 +10,7 @@ namespace DragonBook.SymbolTables
         public void TestMethod()
         {
             var translator = new Translator();
-            var output = translator.Translate("{ int x; char y; { bool y; x; y; } x; y; }");
+            var output = translator.Translate("{ int x; int y; int z; { bool x; bool y; { string x; x; y; z; } x; y; z; } x; y; z; }");
         }
     }
 }
