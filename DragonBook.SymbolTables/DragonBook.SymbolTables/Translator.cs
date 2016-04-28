@@ -31,8 +31,14 @@ namespace DragonBook.SymbolTables
         private void TranslateDeclaration()
         {
             var type = Match("Identifier");
+            Append(type.Value);
+            Append(" ");
+
             var variable = Match("Identifier");
+            Append(variable.Value);
+
             Match("Semicolon");
+            Append("; ");
 
             var symbol = new Symbol(type.Value, variable.Value);
             this.scope.AddSymbol(symbol);
@@ -54,7 +60,7 @@ namespace DragonBook.SymbolTables
             {
                 TranslateFactor();
                 Match("Semicolon");
-                Append(";");
+                Append("; ");
             }
         }
 
@@ -62,6 +68,7 @@ namespace DragonBook.SymbolTables
         {
             var leftBrace = Match("LeftBrace");
             Append(leftBrace.Value);
+            Append(" ");
 
             this.scope = new Scope(this.scope);
             TranslateDeclarations();
@@ -76,7 +83,7 @@ namespace DragonBook.SymbolTables
         {
             var id = Match("Identifier");
             var symbol = this.scope.GetSymbol(id.Value);
-            Append($"{ id.Value }:{ symbol.Type }");
+            Append($"{ id.Value }: { symbol.Type }");
         }
 
         private void Append(string output)
